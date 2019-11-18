@@ -1,0 +1,20 @@
+Kubernetes Concepts - https://kubernetes.io/docs/concepts/
+
+Pod Overview- https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
+
+https://labs.play-with-k8s.com/
+https://www.katacoda.com/courses/kubernetes
+ 
+Free Udemy elearning 
+https://www.udemy.com/kubernetes-getting-started/
+https://azure.microsoft.com/en-in/resources/kubernetes-learning-path/
+https://www.udemy.com/kubernetes-by-example/
+https://www.edx.org/course/introduction-to-kubernetes
+ 
+Many More deep-dive presentations on K8S:
+https://github.com/cncf/presentations/tree/master/kubernetes 
+ 
+LinuxAcademy - Interactive links
+https://interactive.linuxacademy.com/diagrams/KubernetesEssentialsInteractiveDiagram.html
+https://interactive.linuxacademy.com/diagrams/ThePodofMinerva.html
+
