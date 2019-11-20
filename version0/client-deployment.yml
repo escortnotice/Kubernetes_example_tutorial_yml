@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    tier: backend
+spec:
+  template:
+    metadata:
+      labels:
+        app: myapp-basicspringbootanddocker
+    spec:
+      containers:
+      - name: basicspringbootanddocker-container
+        image: escortnotice/basicspringbootanddocker:1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp-basicspringbootanddocker
