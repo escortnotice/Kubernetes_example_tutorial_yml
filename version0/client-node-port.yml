@@ -9,5 +9,5 @@ spec:
     targetPort: 8085
     nodePort: 31515
   selector:
-    component: web
+    app: myapp-basicspringbootanddocker
     
