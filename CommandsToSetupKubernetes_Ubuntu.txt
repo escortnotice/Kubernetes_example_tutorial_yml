@@ -65,5 +65,26 @@ Now type, > kubectl get nodes, this will show all nodes in ready state.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
+#8 -- Enable kubernetes Visualization
 
+The Dashboard UI is not deployed by default. To deploy it, run the following command:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta6/aio/deploy/recommended.yaml
 
+You can access Dashboard using the kubectl command-line tool by running the following command:
+kubectl proxy
+
+Kubectl will make Dashboard available at http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
+
+run the below commands to create user,authentication token and access the dashboard:
+kubectl create -f userdashboard-config1.yaml
+kubectl create -f userdashboard-config2.yaml
+
+Now we need to find token we can use to log in. Execute following command:
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+Copy paste the token you recieve in the dashboard login screen
+
+Ex:
+Token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLThyNXE1Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIxZDBlODE2Mi0wZDE0LTExZWEtYjQzOC0wMjUwMDAwMDAwMDEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.bwk3qPKHjXi0YkhahzBSqScP-Znurq-2eQEzCx_btM-DLULntZSErixdvkNdV6R8RJqzI-poptu0lgqRTKy-Mf10HEWizZR5G_hWKZqGbOuo65JathpbSEiPBggWd1VKhDKoNdjF_Cip-igpQ0zgSeqtWDLWHOuswRYtyIHFL1vx80APgHm0lPjMv1N9d0KTkh9efYaqN5dpxU4tch3y_qtmI2VMYF-ORrHdztzh_8E_XS2W3UFAPPOwxqbRwzSomho5wDO8hFtkVLUS0EG4QbFBduuOrpnqiHQv-EeAsm9qo1r_xpS4ep7mxlAT4qA_7tWtLl4zoBaT_yNpCCzgpA
+
+Refer for more details: https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+----------------------------------------------------------------------------------------------------------------------------------------------------

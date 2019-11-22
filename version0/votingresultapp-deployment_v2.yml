@@ -1,0 +1,182 @@
+## Configured with NodePortService
+# voting app deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votingapp-deployment
+spec:
+  template:
+    metadata:
+      name: votingapp-pod
+      labels:
+        app: votingapp
+    spec:
+      containers:
+      - name: votingapp-container
+        image: docker/example-voting-app-vote
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: votingapp
+---
+# voting app Service (NodePort Service)
+apiVersion: v1
+kind: Service
+metadata:
+  name: votingapp-service-lb
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    nodePort: 31515
+  selector:
+    app: votingapp
+---
+# redis db deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-db-deployment
+spec:
+  template:
+    metadata:
+      name: redis-db-pod
+      labels:
+        app: redis-db
+    spec:
+      containers:
+      - name: redis-db-container
+        image: redis
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6379
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-db
+---
+# redis service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  type: ClusterIP
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    app: redis-db
+---
+# worker app deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workerapp-deployment
+spec:
+  template:
+    metadata:
+      name: workerapp-pod
+      labels:
+        app: workerapp
+    spec:
+      containers:
+      - name: workerapp-container
+        image: docker/example-voting-app-worker
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workerapp
+---
+# postgres db deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresdb-deployment
+spec:
+  template:
+    metadata:
+      name: postgresdb-pod
+      labels:
+        app: postgres-db
+    spec:
+      containers:
+      - name: postgres-container
+        image: postgres
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5432
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-db
+---
+# postgres db Service (Cluster IP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: postgres-db
+---
+# result app deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-deployment
+spec:
+  template:
+    metadata:
+      name: resultapp-pod
+      labels:
+        app: resultapp
+    spec:
+      containers:
+      - name: resultapp-container
+        image: docker/example-voting-app-result
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resultapp
+---
+# result app service (Load Balancer)
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service-lb
+spec:
+  type: NodePort
+  ports:
+  - port: 8081
+    targetPort: 80
+    nodePort: 31516
+  selector:
+    app: resultapp
