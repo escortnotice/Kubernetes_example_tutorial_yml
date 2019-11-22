@@ -1,0 +1,65 @@
+kubectl get nodes - get all running nodes in the cluster (Master + worker)
+
+kubectl get all - gives a list of all kubernetes objects running like deployments,replicas,pods,services etc.
+
+## POD Commands:
+
+kubectl get pods - get all running pods
+
+kubectl desc pods - gives all the details about the running pods , like image running, which worker node it is running, container id , etc.
+
+kubectl get pods -o wide - gives the information of the pods running in which node and the ip address of the node.
+
+kubectl create -f <pod-definition file name> - runs a pod definition file to create pods and containers inside it.
+
+kubectl delete pod <pod name> - will delete the pod with that name
+
+kubectl delete -f <pod-definition file name> - will delete all pods created from that file.
+
+## replica set commands:
+
+kubectl create -f <replica set definition file name>
+kubectl replace -f <replica set definition file name>
+kubectl scale --replicas=6 -f <replica set definition file name>
+kubectl scale --replicas=6 replicaset <replica set name>
+kubectl delete replicaset <replicaset name>
+kubectl describe replicaset
+kubectl get replicaset
+
+## Deployment Commands:
+
+kubectl create -f <deployment-definition file name> - will create the deployment with all pods, replicasets, deployment 
+objects etc.
+
+kubectl create -f <deployment-definition file name> --record - will record the deployment from here on and any changes
+in the deployment will be shown as a list on firing the history command below.
+
+kubectl rollout history deployment/<deployment name> - will show the deployment history.
+
+kubectl rollout status deployment/<deployment name> - wills show the current status of deployment
+
+kubectl rollout undo deployment/<deployment name> - this will reset the deployment to the previous deployment.
+
+kubectl apply -f <deployment definition file name> - will update the existing deployment with the changes in the file.
+
+kubectl get deployments - will show a list of all deployments.
+
+kubectl describe deployment - will show the detail of deployment
+
+kubectl delete deployment <deployment name> - will delete the deployment, pods, replica sets, etc.
+
+kubectl delete -f <deployment file name> - will delete the deployment, pods, replica sets, etc.
+
+
+kubectl set image deployment/<deployment name> <image name> - will do a new deployment will updated image. This will 
+only update the current deployment on the fly, and not the deployment file.
+
+kubectl run <deployment name> --image=<image name> - this is another way to create a deployment directly without a deployment defintion file.
+ex: kubectl run nginx-deployment --image=nginx
+
+
+
+
+
+
+
