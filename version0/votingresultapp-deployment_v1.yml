@@ -12,19 +12,19 @@ spec:
         app: votingapp
     spec:
       containers:
-      - name: votingapp-container
-        image: docker/example-voting-app-vote
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 80
+        - name: votingapp-container
+          image: docker/example-voting-app-vote
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
   replicas: 1
   selector:
     matchLabels:
       app: votingapp
----   #use to separate two kubernetes object definitions.Must have when multiple config present in one file
+--- #use to separate two kubernetes object definitions.Must have when multiple config present in one file
 # voting app Service (Load Balancer)
 apiVersion: v1
 kind: Service
@@ -33,9 +33,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8080
-    targetPort: 80
-    nodePort: 31515
+    - port: 8080
+      targetPort: 80
+      nodePort: 31515
   selector:
     app: votingapp
 ---
@@ -52,14 +52,14 @@ spec:
         app: redis-db
     spec:
       containers:
-      - name: redis-db-container
-        image: redis
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 6379
+        - name: redis-db-container
+          image: redis
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 6379
   replicas: 1
   selector:
     matchLabels:
@@ -73,8 +73,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 6379
-    targetPort: 6379
+    - port: 6379
+      targetPort: 6379
   selector:
     app: redis-db
 ---
@@ -91,12 +91,12 @@ spec:
         app: workerapp
     spec:
       containers:
-      - name: workerapp-container
-        image: docker/example-voting-app-worker
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        - name: workerapp-container
+          image: docker/example-voting-app-worker
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
   replicas: 1
   selector:
     matchLabels:
@@ -115,14 +115,14 @@ spec:
         app: postgres-db
     spec:
       containers:
-      - name: postgres-container
-        image: postgres
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 5432
+        - name: postgres-container
+          image: postgres
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5432
   replicas: 1
   selector:
     matchLabels:
@@ -136,8 +136,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 5432
-    targetPort: 5432
+    - port: 5432
+      targetPort: 5432
   selector:
     app: postgres-db
 ---
@@ -154,14 +154,14 @@ spec:
         app: resultapp
     spec:
       containers:
-      - name: resultapp-container
-        image: docker/example-voting-app-result
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 80
+        - name: resultapp-container
+          image: docker/example-voting-app-result
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
   replicas: 1
   selector:
     matchLabels:
@@ -175,8 +175,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8081
-    targetPort: 80
-    nodePort: 31516
+    - port: 8081
+      targetPort: 80
+      nodePort: 31516
   selector:
     app: resultapp
