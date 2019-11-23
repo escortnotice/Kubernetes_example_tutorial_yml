@@ -2,6 +2,8 @@ kubectl get nodes - get all running nodes in the cluster (Master + worker)
 
 kubectl get all - gives a list of all kubernetes objects running like deployments,replicas,pods,services etc.
 
+kubectl cluster-info - gives the cluster information
+
 ## POD Commands:
 
 kubectl get pods - get all running pods
