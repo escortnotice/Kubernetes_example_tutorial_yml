@@ -27,6 +27,8 @@ kubectl scale --replicas=6 replicaset <replica set name>
 kubectl delete replicaset <replicaset name>
 kubectl describe replicaset
 kubectl get replicaset
+kubectl get replicaset <replica set name> -o yaml > replicaset.yaml - this will create a replicaset.yaml file from the 
+replicaset.
 
 ## Deployment Commands:
 
