@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: votingapp-ingress
+spec:
+  backend:
+    serviceName: votingapp-service-lb
+    servicePort: 8080

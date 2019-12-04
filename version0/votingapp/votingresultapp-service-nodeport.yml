@@ -1,0 +1,27 @@
+# voting app Service (NodePort Service)
+apiVersion: v1
+kind: Service
+metadata:
+  name: votingapp-service-nodeport
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    nodePort: 31515
+  selector:
+    app: votingapp
+---
+# result app service (Load Balancer)
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service-nodeport
+spec:
+  type: NodePort
+  ports:
+  - port: 8081
+    targetPort: 80
+    nodePort: 31516
+  selector:
+    app: resultapp

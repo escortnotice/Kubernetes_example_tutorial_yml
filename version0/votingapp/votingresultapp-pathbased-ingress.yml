@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: votingappresult
+  annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: "serviceName=votingapp-service-lb rewrite=/;serviceName=result-service-lb rewrite=/"
+    
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /vote
+            backend:
+              serviceName: votingapp-service-lb
+              servicePort: 8080
+          - path: /result
+            backend:
+              serviceName: result-service-lb
+              servicePort: 8081

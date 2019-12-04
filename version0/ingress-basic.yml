@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: myapp
+spec:
+  backend:
+    serviceName: cluster-ip-service
+    servicePort: 8085

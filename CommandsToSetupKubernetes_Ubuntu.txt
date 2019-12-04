@@ -64,7 +64,17 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 Now type, > kubectl get nodes, this will show all nodes in ready state.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
+Installing Nginx-Ingress Controller:
 
+https://kubernetes.github.io/ingress-nginx/deploy/
+
+For Mac (Docker Desktop):
+1) Create Ingress Controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+
+2) Create a load balancer service to service Ingress Controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml
+-------------------------------------------------------------------------------------------------------------------------------------------
 #8 -- Enable kubernetes Visualization
 
 The Dashboard UI is not deployed by default. To deploy it, run the following command:
@@ -88,3 +98,15 @@ Token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2Nv
 
 Refer for more details: https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
 ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Visualization of the flow of components:
+
+1) Using Weave Scope:
+Ensure your computer is behind a firewall that blocks port 4040 then,
+
+sudo curl -L git.io/scope -o /usr/local/bin/scope
+sudo chmod a+x /usr/local/bin/scope
+scope launch
+This script downloads and runs a recent Scope image from Docker Hub. Now, open your web browser to http://localhost:4040.
+
+---------------------------------------------------------------------------------------------------------------

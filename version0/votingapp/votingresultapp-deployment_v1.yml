@@ -24,7 +24,8 @@ spec:
   selector:
     matchLabels:
       app: votingapp
---- #use to separate two kubernetes object definitions.Must have when multiple config present in one file
+--- 
+# "---" use to separate two kubernetes object definitions.Must have when multiple config present in one file
 # voting app Service (Load Balancer)
 apiVersion: v1
 kind: Service

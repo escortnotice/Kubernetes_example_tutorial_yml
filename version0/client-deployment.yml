@@ -7,17 +7,20 @@ metadata:
 spec:
   template:
     metadata:
+      name: myapp-pod
       labels:
-        app: myapp-basicspringbootanddocker
+        app: myapp
     spec:
       containers:
-      - name: basicspringbootanddocker-container
-        image: escortnotice/basicspringbootanddocker:1
+      - name: myapp-container
+        image: escortnotice/basicspringbootanddocker
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "500m"
-  replicas: 2
+            # memory -- 1 Kib (kibibyte = 1024 byte), 1 MiB(Mebibitye) = 1024 Kib 
+            # cpu -- If a system has 1 core then 1 core = 1000 millicore, 100m = 100 millicores (1/10 of a core), 500m = (1/2 of a core)
+            memory: "350Mi"
+            cpu: "300m"
+  replicas: 1
   selector:
     matchLabels:
-      app: myapp-basicspringbootanddocker
+      app: myapp
