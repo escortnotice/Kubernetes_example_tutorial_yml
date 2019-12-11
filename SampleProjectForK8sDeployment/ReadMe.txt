@@ -8,4 +8,4 @@
 2) Run the "BasicLoginApp-kube-pathbased-ingress.yml" file
 
 
-# You can refer both the projects ReadMe files for more details about the project.
+# You can refer both the projects ReadMe files for more details about the project
